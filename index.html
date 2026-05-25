@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Internship Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Internship Tracker</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Add / Edit Internship</h2>
+      <form id="internship-form">
+        <input type="hidden" id="edit-index" />
+
+        <div class="field">
+          <label for="company">Company</label>
+          <input type="text" id="company" required />
+        </div>
+
+        <div class="field">
+          <label for="role">Role</label>
+          <input type="text" id="role" required />
+        </div>
+
+        <div class="field">
+          <label for="location">Location</label>
+          <input type="text" id="location" />
+        </div>
+
+        <div class="field">
+          <label for="status">Status</label>
+          <select id="status">
+            <option value="Applied">Applied</option>
+            <option value="Interviewing">Interviewing</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Wishlist">Wishlist</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="date-applied">Date Applied</label>
+          <input type="date" id="date-applied" />
+        </div>
+
+        <div class="field">
+          <label for="job-link">Job Link</label>
+          <input type="url" id="job-link" placeholder="https://..." />
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" rows="3"></textarea>
+        </div>
+
+        <button type="submit" id="save-btn">Save</button>
+        <button type="button" id="cancel-edit-btn" class="secondary hidden">Cancel Edit</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Filter</h2>
+      <div class="filters">
+        <div class="field">
+          <label for="filter-status">Status</label>
+          <select id="filter-status">
+            <option value="">All</option>
+            <option value="Applied">Applied</option>
+            <option value="Interviewing">Interviewing</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Wishlist">Wishlist</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="search">Search (company / role)</label>
+          <input type="text" id="search" placeholder="Search..." />
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Internships</h2>
+      <table id="internship-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Role</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Date Applied</th>
+            <th>Link</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="internship-tbody">
+        </tbody>
+      </table>
+      <p id="empty-state">No internships yet. Add your first one above.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with HTML, CSS, and JavaScript</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
