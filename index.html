@@ -5,72 +5,107 @@
   <title>Internship Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
-  <script src="script.js" defer></script>
 </head>
 <body>
   <header>
-    <h1>Internship Tracker</h1>
+    <div class="header-inner">
+      <div>
+        <div class="brand">
+          <div class="brand-pill">IT</div>
+          <div>
+            <h1>Internship Tracker</h1>
+            <p class="header-subtitle">Track your applications, interviews and offers in one place.</p>
+          </div>
+        </div>
+      </div>
+      <div class="header-badge">
+        Built with HTML · CSS · JS
+      </div>
+    </div>
   </header>
 
   <main>
+    <!-- Left column: Form -->
     <section class="card">
-      <h2>Add / Edit Internship</h2>
+      <div class="card-header">
+        <div>
+          <h2>Add / Edit Internship</h2>
+          <p class="card-caption">Log each opportunity with status, date and notes.</p>
+        </div>
+      </div>
+
       <form id="internship-form">
         <input type="hidden" id="edit-index" />
 
-        <div class="field">
-          <label for="company">Company</label>
-          <input type="text" id="company" required />
+        <div class="field-row">
+          <div class="field">
+            <label for="company">Company</label>
+            <input type="text" id="company" placeholder="e.g. Google" required />
+          </div>
+
+          <div class="field">
+            <label for="role">Role</label>
+            <input type="text" id="role" placeholder="e.g. Software Engineering Intern" required />
+          </div>
         </div>
 
-        <div class="field">
-          <label for="role">Role</label>
-          <input type="text" id="role" required />
+        <div class="field-row">
+          <div class="field">
+            <label for="location">Location</label>
+            <input type="text" id="location" placeholder="Remote / City, Country" />
+          </div>
+
+          <div class="field">
+            <label for="status">Status</label>
+            <select id="status">
+              <option value="Applied">Applied</option>
+              <option value="Interviewing">Interviewing</option>
+              <option value="Offer">Offer</option>
+              <option value="Rejected">Rejected</option>
+              <option value="Wishlist">Wishlist</option>
+            </select>
+          </div>
         </div>
 
-        <div class="field">
-          <label for="location">Location</label>
-          <input type="text" id="location" />
-        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="date-applied">Date Applied</label>
+            <input type="date" id="date-applied" />
+          </div>
 
-        <div class="field">
-          <label for="status">Status</label>
-          <select id="status">
-            <option value="Applied">Applied</option>
-            <option value="Interviewing">Interviewing</option>
-            <option value="Offer">Offer</option>
-            <option value="Rejected">Rejected</option>
-            <option value="Wishlist">Wishlist</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="date-applied">Date Applied</label>
-          <input type="date" id="date-applied" />
-        </div>
-
-        <div class="field">
-          <label for="job-link">Job Link</label>
-          <input type="url" id="job-link" placeholder="https://..." />
+          <div class="field">
+            <label for="job-link">Job Link</label>
+            <input type="url" id="job-link" placeholder="https://careers.example.com/job" />
+          </div>
         </div>
 
         <div class="field">
           <label for="notes">Notes</label>
-          <textarea id="notes" rows="3"></textarea>
+          <textarea id="notes" rows="3" placeholder="Interview rounds, contacts, reminders, etc."></textarea>
         </div>
 
-        <button type="submit" id="save-btn">Save</button>
-        <button type="button" id="cancel-edit-btn" class="secondary hidden">Cancel Edit</button>
+        <div style="margin-top: 0.3rem; display: flex; gap: 0.4rem;">
+          <button type="submit" id="save-btn" class="btn">Save</button>
+          <button type="button" id="cancel-edit-btn" class="btn btn-secondary hidden">Cancel Edit</button>
+        </div>
       </form>
     </section>
 
+    <!-- Right column: Filters + Table -->
     <section class="card">
-      <h2>Filter</h2>
+      <div class="card-header">
+        <div>
+          <h2>Internship Pipeline</h2>
+          <p class="card-caption">Filter and review all of your applications at a glance.</p>
+        </div>
+      </div>
+
+      <!-- Filters -->
       <div class="filters">
         <div class="field">
           <label for="filter-status">Status</label>
           <select id="filter-status">
-            <option value="">All</option>
+            <option value="">All statuses</option>
             <option value="Applied">Applied</option>
             <option value="Interviewing">Interviewing</option>
             <option value="Offer">Offer</option>
@@ -81,34 +116,36 @@
 
         <div class="field">
           <label for="search">Search (company / role)</label>
-          <input type="text" id="search" placeholder="Search..." />
+          <input type="text" id="search" placeholder="Search by company or role" />
         </div>
       </div>
-    </section>
 
-    <section class="card">
-      <h2>Internships</h2>
-      <table id="internship-table">
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th>Role</th>
-            <th>Location</th>
-            <th>Status</th>
-            <th>Date Applied</th>
-            <th>Link</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="internship-tbody">
-        </tbody>
-      </table>
-      <p id="empty-state">No internships yet. Add your first one above.</p>
+      <!-- Internship List -->
+      <div class="table-wrapper">
+        <table id="internship-table">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Date Applied</th>
+              <th>Link</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="internship-tbody">
+            <!-- Populated by script.js -->
+          </tbody>
+        </table>
+        <p id="empty-state">No internships yet. Add your first one on the left.</p>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Built with HTML, CSS, and JavaScript</p>
+    <span>Internship Tracker · Local data only (saved in your browser).</span>
+    <span>You can export or move this to a real database later.</span>
   </footer>
 
   <script src="script.js"></script>

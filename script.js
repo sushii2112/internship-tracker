@@ -56,11 +56,22 @@ function renderTable() {
   filtered.forEach((item, index) => {
     const tr = document.createElement("tr");
 
+    const statusClass =
+      item.status === "Applied"
+        ? "status-applied"
+        : item.status === "Interviewing"
+        ? "status-interviewing"
+        : item.status === "Offer"
+        ? "status-offer"
+        : item.status === "Rejected"
+        ? "status-rejected"
+        : "status-wishlist";
+
     tr.innerHTML = `
       <td>${item.company}</td>
       <td>${item.role}</td>
       <td>${item.location || "-"}</td>
-      <td>${item.status}</td>
+      <td><span class="status-pill ${statusClass}">${item.status}</span></td>
       <td>${item.dateApplied || "-"}</td>
       <td>${
         item.jobLink
@@ -68,18 +79,12 @@ function renderTable() {
           : "-"
       }</td>
       <td>
-        <button type="button" class="small-btn edit-btn" data-index="${index}">Edit</button>
-        <button type="button" class="small-btn delete-btn" data-index="${index}">Delete</button>
+        <button type="button" class="btn btn-small btn-edit edit-btn" data-index="${index}">Edit</button>
+        <button type="button" class="btn btn-small btn-delete delete-btn" data-index="${index}">Delete</button>
       </td>
     `;
 
     tbody.appendChild(tr);
-  });
-
-  document.querySelectorAll(".small-btn").forEach((btn) => {
-    btn.style.padding = "0.25rem 0.5rem";
-    btn.style.fontSize = "0.8rem";
-    btn.style.marginRight = "0.25rem";
   });
 }
 
